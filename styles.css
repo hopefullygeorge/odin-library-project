@@ -1,0 +1,73 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.hidden {
+  display: none;
+}
+
+body {
+  padding-top: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#bookCountP {
+  background-color: black;
+  color: white;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  font-weight: bold;
+  padding: 2px;
+}
+
+#mainBody {
+  background-color: blue;
+  display: flex;
+  padding: 10px;
+  gap: 2em;
+}
+
+#formDiv {
+  background-color: green;
+  border-radius: 15px;
+}
+
+#bookshelfDiv {
+  width: 400px;
+  height: 700px;
+  background-color: purple;
+  border-radius: 15px;
+}
+
+#buttonDiv {
+  width: 400px;
+  height: 50px;
+  border: solid 2px red;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#buttonDiv button {
+  width: 100px;
+  border-radius: 15px;
+}
+
+form {
+  display: grid;
+  gap: 1rem;
+}
+
+.form-group {
+  display: grid;
+}
+
+label {
+}
+
+input {
+}
