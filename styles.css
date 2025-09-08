@@ -1,6 +1,6 @@
 :root {
   --book-h: 220px;
-  --spine-w: 28px;
+  --spine-w: 40px;
   --cover-w: 150px;
   --dur: 1000ms;
 }
@@ -8,7 +8,7 @@
 * {
   margin: 0;
   padding: 0;
-  border: solid 2px red;
+  /* border: solid 2px red; */
   box-sizing: border-box;
 }
 
@@ -17,26 +17,47 @@
   width: 100vw - 2px;
   background-color: brown;
   display: grid;
-  grid-template-rows: auto 1fr 1fr;
+  grid-template-rows: repeat(auto-fill, 1fr);
   align-items: center;
   justify-items: center;
   padding: 20px;
+  gap: 20px;
+}
+
+.bookStuff {
+  width: 100%;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.bookFunc {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 .shelf {
-  background-color: aquamarine;
-  width: 670px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  background-color: rgb(238, 201, 168);
+  width: 100%;
+  /* display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(50px, 1fr)); */
+  display: flex;
   padding: 20px;
-  gap: 10px;
+  align-items: center;
+  justify-content: baseline;
+  gap: 30px;
 }
 
 /* ----------  Book Syling and Animation --------- */
 .book {
   position: relative;
   height: var(--book-h);
-  width: var(--cover-w);
+  /* width: var(--cover-w); */
+  /* Changing width to spine-w and then on hover, change to book-h */
+  width: var(--spine-w);
   perspective: 900px;
   transition: width var(--dur) ease;
 }
@@ -54,17 +75,21 @@
   left: 0;
   width: var(--spine-w);
   height: 100%;
-  background: black;
+  background: rgb(40, 40, 40);
   color: goldenrod;
   display: flex;
   justify-content: center;
   align-items: center;
-  writing-mode: vertical-lr;
+  writing-mode: vertical-rl;
   font-weight: bold;
   transform-origin: right center;
   transform: rotate(0deg);
   transition: transform var(--dur) ease;
   z-index: 2;
+  text-align: center;
+  box-shadow: 0 4px 2px -2px rgb(0, 0, 0, 0.2);
+  border-radius: 3px;
+  border: solid 2px goldenrod;
 }
 
 .cover {
@@ -73,13 +98,16 @@
   height: 100%;
   /* background: url(assets/lotr_book_cover.jpg) center/cover no-repeat; */
   transform-origin: left center;
-  transform: rotateY(90deg);
+  transform: rotateY(86deg);
   transition: transform var(--dur) ease;
   z-index: 1;
+  box-shadow: 0 4px 2px -2px rgb(0, 0, 0, 0.2);
+  border: solid 2px goldenrod;
 }
 
 .book:hover {
-  width: var(--cover-w);
+  width: calc(var(--cover-w) + 50px);
+  transform: scale(1.1);
 }
 
 .book:hover .spine {
@@ -96,6 +124,8 @@
   background-color: purple;
   width: 400px;
   overflow-y: auto;
+  padding: 20px;
+  gap: 5px;
 }
 
 /* ----------  Form Styling --------- */
@@ -105,6 +135,7 @@ form {
   grid-template-rows: repeat(3, 1fr);
   background-color: azure;
   padding: 10px;
+  display: none;
 }
 
 .form-group {
@@ -112,4 +143,15 @@ form {
   grid-template-columns: 1fr 2fr;
   padding: 5px;
   gap: 10px;
+}
+
+.addBook {
+  width: 50px;
+  height: 50px;
+  border-radius: 25%;
+  font-size: 50px;
+  box-shadow: 3px 3px 6px rgb(0, 0, 0, 0.2);
+  background: url(assets/lucide_plus.svg) center/cover no-repeat white;
+  background-size: 40px;
+  grid-column: 2;
 }
