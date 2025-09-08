@@ -1,67 +1,127 @@
+:root {
+  --book-h: 220px;
+  --spine-w: 28px;
+  --cover-w: 150px;
+  --dur: 1000ms;
+}
+
 * {
-  padding: 0;
   margin: 0;
+  padding: 0;
+  /* border: solid 2px red; */
+  box-sizing: border-box;
 }
 
-.hidden {
-  display: none;
-}
-
-body {
-  padding-top: 100px;
-  display: flex;
-  justify-content: center;
+.container {
+  height: 800px;
+  width: 100vw - 2px;
+  background-color: brown;
+  display: grid;
+  grid-template-rows: auto 3fr;
   align-items: center;
-  flex-direction: column;
+  justify-items: center;
+  padding: 20px;
 }
 
-#bookCountP {
-  background-color: black;
-  color: white;
-  width: 25px;
-  height: 25px;
-  text-align: center;
-  font-weight: bold;
-  padding: 2px;
-}
-
-#mainBody {
-  background-color: blue;
-  display: flex;
-  padding: 10px;
-  gap: 2em;
-}
-
-#formDiv {
-  background-color: green;
-  border-radius: 15px;
-}
-
-#bookshelfDiv {
-  width: 400px;
-  height: 700px;
-  background-color: purple;
-  border-radius: 15px;
-}
-
-#buttonDiv {
-  width: 400px;
-  height: 50px;
-  border: solid 2px red;
-  display: flex;
-  justify-content: space-evenly;
-}
-
-#buttonDiv button {
-  width: 100px;
-  border-radius: 15px;
+.shelf {
+  background-color: aquamarine;
+  width: 670px;
+  height: 300px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  padding: 20px;
+  gap: 10px;
 }
 
 form {
   display: grid;
-  gap: 1rem;
+  grid-template-rows: repeat(3, 1fr);
+  background-color: azure;
+  padding: 10px;
 }
 
 .form-group {
   display: grid;
+  grid-template-columns: 1fr 2fr;
+  padding: 5px;
+  gap: 10px;
+}
+
+/* .book {
+  width: 150px;
+  height: 200px;
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  background-color: aliceblue;
+  box-shadow: 3px 3px 6px black;
+  border-radius: 5px;
+  background-size: cover;
+}
+
+.bookProfile {
+  height: 200px;
+  width: 50px;
+  background-color: pink;
+  writing-mode: vertical-rl;
+  display: grid;
+  grid-template-rows: auto auto;
+  padding: 5px;
+  border-radius: 3px;
+} */
+
+.book {
+  position: relative;
+  height: var(--book-h);
+  width: var(--cover-w);
+  perspective: 900px;
+  transition: width var(--dur) ease;
+}
+
+.spine,
+.cover {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+
+.spine {
+  left: 0;
+  width: var(--spine-w);
+  height: 100%;
+  background: black;
+  color: goldenrod;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  writing-mode: vertical-lr;
+  font-weight: bold;
+  transform-origin: right center;
+  transform: rotate(0deg);
+  transition: transform var(--dur) ease;
+  z-index: 2;
+}
+
+.cover {
+  left: var(--spine-w);
+  width: var(--cover-w);
+  height: 100%;
+  background: url(assets/lotr_book_cover.jpg) center/cover no-repeat;
+  transform-origin: left center;
+  transform: rotateY(90deg);
+  transition: transform var(--dur) ease;
+  z-index: 1;
+}
+
+.book:hover {
+  width: var(--cover-w);
+}
+
+.book:hover .spine {
+  transform: rotateY(-90deg);
+}
+
+.book:hover .cover {
+  transform: rotateY(0deg);
 }
