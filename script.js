@@ -2,8 +2,28 @@ const shelf = document.querySelector(".shelf");
 const bookCounter = document.querySelector("#bookCounter");
 const form = document.querySelector("#bookForm");
 const refreshButton = document.querySelector(".refreshButton");
+const tableBody = document.querySelector(".tableBody");
 
-const myLibrary = [];
+const myLibrary = [
+  {
+    title: "The Hobbit",
+    author: "J.R.R. Tolkien",
+    frontCover:
+      "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1546071216i/5907.jpg",
+  },
+  {
+    title: "Harry Potter and the Philosopher's Stone",
+    author: "J.K. Rowling",
+    frontCover:
+      "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1598823299i/42844155.jpg",
+  },
+  {
+    title: "Atomic Habits",
+    author: "James Clear",
+    frontCover:
+      "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1655988385i/40121378.jpg",
+  },
+];
 
 function Book(title, author, frontCoverUrl) {
   this.id = crypto.randomUUID();
@@ -19,14 +39,40 @@ function addBookToLibrary(title, author, url) {
   myLibrary.push(newBook);
 }
 
-function displayInShelf() {
-  shelf.innerHTML = "";
+function refreshList() {
   myLibrary.forEach((book) => {
-    const bookCard = document.createElement("div");
-    bookCard.classList.add("bookCard");
-    console.log(bookCard);
-    bookCard.style.backgroundImage = `url(${book.frontCoverUrl})`;
-    shelf.appendChild(bookCard);
+    const row = document.createElement("tr");
+    row.innerHTML = `
+  <td>${book.title}</td>
+  <td>${book.author}</td>
+  <td>${book.frontCover}</td>
+  `;
+    tableBody.appendChild(row);
+  });
+}
+
+function createBookDiv(book) {
+  const newBook = document.createElement("div");
+  newBook.classList.add("book");
+  const cover = document.createElement("div");
+  cover.classList.add("cover");
+
+  cover.style.background = `url(${book.frontCover}) center / cover no-repeat`;
+
+  const spine = document.createElement("div");
+  spine.classList.add("spine");
+  const titleP = document.createElement("p");
+  titleP.innerText = book.title;
+  spine.appendChild(titleP);
+  newBook.appendChild(spine);
+  newBook.appendChild(cover);
+  return newBook;
+}
+
+function displayInShelf() {
+  myLibrary.forEach((book) => {
+    newBook = createBookDiv(book);
+    shelf.appendChild(newBook);
   });
 }
 
@@ -40,6 +86,8 @@ form.addEventListener("submit", function (e) {
   const bookCover = formData.get("book_cover");
 
   addBookToLibrary(title, author, bookCover);
-  console.table(myLibrary);
   displayInShelf();
+  refreshList();
 });
+
+displayInShelf();

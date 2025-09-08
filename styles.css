@@ -8,7 +8,7 @@
 * {
   margin: 0;
   padding: 0;
-  /* border: solid 2px red; */
+  border: solid 2px red;
   box-sizing: border-box;
 }
 
@@ -17,7 +17,7 @@
   width: 100vw - 2px;
   background-color: brown;
   display: grid;
-  grid-template-rows: auto 3fr;
+  grid-template-rows: auto 1fr 1fr;
   align-items: center;
   justify-items: center;
   padding: 20px;
@@ -26,49 +26,13 @@
 .shelf {
   background-color: aquamarine;
   width: 670px;
-  height: 300px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   padding: 20px;
   gap: 10px;
 }
 
-form {
-  display: grid;
-  grid-template-rows: repeat(3, 1fr);
-  background-color: azure;
-  padding: 10px;
-}
-
-.form-group {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  padding: 5px;
-  gap: 10px;
-}
-
-/* .book {
-  width: 150px;
-  height: 200px;
-  display: grid;
-  grid-template-rows: auto auto 1fr;
-  background-color: aliceblue;
-  box-shadow: 3px 3px 6px black;
-  border-radius: 5px;
-  background-size: cover;
-}
-
-.bookProfile {
-  height: 200px;
-  width: 50px;
-  background-color: pink;
-  writing-mode: vertical-rl;
-  display: grid;
-  grid-template-rows: auto auto;
-  padding: 5px;
-  border-radius: 3px;
-} */
-
+/* ----------  Book Syling and Animation --------- */
 .book {
   position: relative;
   height: var(--book-h);
@@ -107,7 +71,7 @@ form {
   left: var(--spine-w);
   width: var(--cover-w);
   height: 100%;
-  background: url(assets/lotr_book_cover.jpg) center/cover no-repeat;
+  /* background: url(assets/lotr_book_cover.jpg) center/cover no-repeat; */
   transform-origin: left center;
   transform: rotateY(90deg);
   transition: transform var(--dur) ease;
@@ -124,4 +88,28 @@ form {
 
 .book:hover .cover {
   transform: rotateY(0deg);
+}
+
+/* ----------  List/DB View --------- */
+
+.tableView {
+  background-color: purple;
+  width: 400px;
+  overflow-y: auto;
+}
+
+/* ----------  Form Styling --------- */
+
+form {
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  background-color: azure;
+  padding: 10px;
+}
+
+.form-group {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  padding: 5px;
+  gap: 10px;
 }
